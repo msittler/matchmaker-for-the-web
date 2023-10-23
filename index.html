@@ -1,13 +1,257 @@
 <!DOCTYPE html>
 <html lang="en"> 
+
+<!--
+  Author: Matthew Sittler
+  Lewis Email: matthewjsittler@lewisu.edu
+  Project: Matchmaker For The Web
+
+  All Rights Reserved
+-->
+
+<html>
 <head>
-  <title>Page Title</title>
-  <meta charset="UTF-8">
+<style>
+body {
+  background-image: url("hearts_background_three.png");
+}
+</style>
+<style>
+  .center {
+    text-align: center;
+    border: 3px solid red;
+  }
+
+  body {
+  color: darkred;
+}
+
+h1 {
+  color: darkred;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+body {
+    text-align: center;
+}
+
+li {
+    text-align: left;
+}
+  </style>
+  </head>
+  <body>
+  
+  <div class="center">
+    <h1>Matchmaker<h>
+  </div>
 </head>
 <body>
 
-  <h1>Matchmaker</h1>
-  <p>This is a paragraph.</p>
+<head>
+  <title>Matchmaker</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+
+  <style>
+    .center {
+      text-align: center;
+      border: 3px solid red;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <div class="center">
+      <p>Hello, today you will be competing for my love by answering a series of questions that I have created to see how compatible we are.
+        Below you are five questions, and I am requesting that you answer each one honestly to see if we will be compatible enough to go out on a date.
+        When you click, there will be a drop down tab, with five choices you can pick as your answer.
+        Click on the answer you choose and move onto the next question. When you are finished, click on the "Calculate compatability" button to have our compatibility calculated.
+        When it is finished, you will get a score and a message saying if we are compatible enough, or if we are not. I wish you the best of luck!<p>
+    </div>
+    <br /><br />
+
+  <label>Do you like planes or cars?</label><br />
+  <select id="q1">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
+
+  <label>Hiking trips are better than beach trips.</label><br />
+  <select id="q2">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
+
+  <label>LEGOS are for adults and kids.</label><br />
+  <select id="q3">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
+
+  <label>Newer cars over vintage cars.</label><br />
+  <select id="q4">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
+
+  <label>Baseball is a fun sport to watch.</label><br />
+  <select id="q5">
+    <option value="5">Strongly Agree</option>
+    <option value="4">Agree</option>
+    <option value="3">Neutral</option>
+    <option value="2">Disagree</option>
+    <option value="1">Strongly Disagree</option>
+  </select>
+  <br /><br />
+
+  
+
+  <script>
+    function showBreakdown(q1, q2, q3, q4, q5) {
+
+      document.getElementById("q1result").innerHTML = "You answered " + document.getElementById("q1").selectedOptions[0].text
+      + ", and the correct answer was Strongly Agree. This results in a compatability score of " + q1
+      document.getElementById("q2result").innerHTML = "You answered " + document.getElementById("q2").selectedOptions[0].text
+      + ", and the correct answer was Agree. This results in a compatability score of " + q2
+      document.getElementById("q3result").innerHTML = "You answered " + document.getElementById("q3").selectedOptions[0].text
+      + ", and the correct answer was Agree. This results in a compatability score of " + q3
+      document.getElementById("q4result").innerHTML = "You answered " + document.getElementById("q4").selectedOptions[0].text
+      + ", and the correct answer was Disagree. This results in a compatability score of " + q4
+      document.getElementById("q5result").innerHTML = "You answered " + document.getElementById("q5").selectedOptions[0].text
+      + ", and the correct answer was Strongly Disagree. This results in a compatability score of " + q5
+    }
+  </script>
+
+  <br /><br /><br />
+  <button onclick="calculateCompatability()">Calculate Compatability</button>
+
+  <p id="q1result"></p>
+  <p id="q2result"></p>
+  <p id="q3result"></p>
+  <p id="q4result"></p>
+  <p id="q5result"></p>
+
+  <p id="compatability"></p>
+
+  <p id="remark"></p>
+
+  <script>
+    console.log("Start Matchmaker For The Web");
+
+    function calculateCompatability() {
+      console.log("calculateCompatability()");
+
+      const DESIRED_RESPONSE = [
+        5, /* strongly agree */ 
+        4, /* agree */
+        4, /* agree */
+        2, /* disagree */
+        1, /* strongly disagree */
+
+      ]
+
+      const MAX_SCORE = 25
+
+      // Get the current values of the dropdown controls.
+      let question1response = document.getElementById("q1").selectedOptions[0].value;
+      let question2response = document.getElementById("q2").selectedOptions[0].value;
+      let question3response = document.getElementById("q3").selectedOptions[0].value;
+      let question4response = document.getElementById("q4").selectedOptions[0].value;
+      let question5response = document.getElementById("q5").selectedOptions[0].value;
+
+      // Optionally log the values associated with question 1 through 5 to the console.
+      console.log("Question 1 Answers:")
+      console.log(document.getElementById("q1").selectedOptions[0].text);
+      console.log(document.getElementById("q1").selectedOptions[0].value);
+      console.log(question1response);
+
+      console.log("Question 2 Answers:");
+      console.log(document.getElementById("q2").selectedOptions[0].text);
+      console.log(document.getElementById("q2").selectedOptions[0].value);
+      console.log(question2response);
+
+      console.log("Question 3 Answers:");
+      console.log(document.getElementById("q3").selectedOptions[0].text);
+      console.log(document.getElementById("q3").selectedOptions[0].value);
+      console.log(question3response);
+
+      console.log("Question 4 Answers:");
+      console.log(document.getElementById("q4").selectedOptions[0].text);
+      console.log(document.getElementById("q4").selectedOptions[0].value);
+      console.log(question4response);
+
+      console.log("Question 5 Answers:");
+      console.log(document.getElementById("q5").selectedOptions[0].text);
+      console.log(document.getElementById("q5").selectedOptions[0].value);
+      console.log(question5response);
+
+      // Todo: Calculate compatability scores.
+      let question1Compatability = 5 - Math.abs(question1response - DESIRED_RESPONSE[0]);
+      let question2Compatability = 5 - Math.abs(question2response - DESIRED_RESPONSE[1]);
+      let question3Compatability = 5 - Math.abs(question3response - DESIRED_RESPONSE[2]);
+      let question4Compatability = 5 - Math.abs(question4response - DESIRED_RESPONSE[3]);
+      let question5Compatability = 5 - Math.abs(question5response - DESIRED_RESPONSE[4]);
+
+
+
+      console.log("c1="+question1Compatability);
+      console.log("c2="+question2Compatability);
+      console.log("c3="+question3Compatability);
+      console.log("c4="+question3Compatability);
+      console.log("c5="+question3Compatability);
+
+      // Calculate total compatability.
+      let totalCompatability = question1Compatability + question2Compatability + question3Compatability + question4Compatability + question5Compatability;
+
+      // Convert totalCompatability to a percentage.
+      totalCompatability *= 100 / MAX_SCORE;
+      totalCompatability = Math.round(totalCompatability);
+      console.log("tc="+ totalCompatability);
+
+      document.getElementById("compatability").innerHTML = "Your compatability is: " + totalCompatability + "%!"
+
+      showBreakdown(question1Compatability, question2Compatability, question3Compatability, question4Compatability, question5Compatability)
+
+      if (totalCompatability < 40) {
+      document.getElementById("remark").innerHTML = "Please stay away from me!"
+      } else if (totalCompatability < 75) {
+      document.getElementById("remark").innerHTML = "We probably aren't a great match, but we can be friends."
+      } else if (totalCompatability <= 100) {
+      document.getElementById("remark").innerHTML = "You're perfect!"
+      } else {
+    //  block of code to be executed if the condition1 is false and condition2 is false
+      }
+    }
+
+
+
+  </script>
 
 </body>
 </html>
